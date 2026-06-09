@@ -5,7 +5,7 @@ from .serializers import AuthorSerializer, BookSerializer, BorrowRecordSerialize
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
-    queryset = Author.objects.all()
+    queryset = Author.objects.prefetch_related("books").all()
     serializer_class = AuthorSerializer
 
 
@@ -17,4 +17,3 @@ class BookViewSet(viewsets.ModelViewSet):
 class BorrowRecordViewSet(viewsets.ModelViewSet):
     queryset = BorrowRecord.objects.select_related("book", "book__author").all()
     serializer_class = BorrowRecordSerializer
-

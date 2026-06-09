@@ -3,10 +3,26 @@ from rest_framework import serializers
 from .models import Author, Book, BorrowRecord
 
 
+class BookSummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = [
+            "id",
+            "title",
+            "isbn",
+            "published_date",
+            "description",
+            "available_copies",
+        ]
+        read_only_fields = fields
+
+
 class AuthorSerializer(serializers.ModelSerializer):
+    books = BookSummarySerializer(many=True, read_only=True)
+
     class Meta:
         model = Author
-        fields = ["id", "first_name", "last_name", "biography", "created_at"]
+        fields = ["id", "first_name", "last_name", "biography", "created_at", "books"]
         read_only_fields = ["id", "created_at"]
 
 
