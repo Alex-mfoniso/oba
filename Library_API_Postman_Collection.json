@@ -1,0 +1,394 @@
+{
+  "info": {
+    "_postman_id": "library-api-collection",
+    "name": "Library API",
+    "description": "Complete Library Management API - Authors, Books, and Borrow Records",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authors",
+      "item": [
+        {
+          "name": "Get All Authors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/authors/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "authors", ""]
+            },
+            "description": "Retrieve all authors with their associated books"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Author",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"biography\": \"An acclaimed novelist with multiple awards\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/authors/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "authors", ""]
+            },
+            "description": "Create a new author"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Author by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/authors/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "authors", "1", ""]
+            },
+            "description": "Retrieve a specific author and their books"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Author (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Smith\",\n  \"biography\": \"Updated biography with more details\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/authors/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "authors", "1", ""]
+            },
+            "description": "Completely replace author data (all fields required)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Author (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"biography\": \"A famous author known for mystery novels\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/authors/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "authors", "1", ""]
+            },
+            "description": "Update only specific fields (partial update)"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Author",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/authors/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "authors", "1", ""]
+            },
+            "description": "Delete an author (cascades to associated books)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Get All Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/books/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "books", ""]
+            },
+            "description": "Retrieve all books"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"The Mystery of the Lost Temple\",\n  \"isbn\": \"978-1-987-65432-1\",\n  \"author\": 1,\n  \"published_date\": \"2023-03-20\",\n  \"description\": \"A thrilling adventure in ancient ruins\",\n  \"available_copies\": 3\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/books/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "books", ""]
+            },
+            "description": "Create a new book (author must exist)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Book by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/books/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "books", "1", ""]
+            },
+            "description": "Retrieve a specific book with all details"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Book (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"The Great Adventure - Revised Edition\",\n  \"isbn\": \"978-1-234-56789-0\",\n  \"author\": 1,\n  \"published_date\": \"2020-05-15\",\n  \"description\": \"An epic journey - completely revised\",\n  \"available_copies\": 7\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/books/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "books", "1", ""]
+            },
+            "description": "Completely replace book data"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Book (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"available_copies\": 10\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/books/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "books", "1", ""]
+            },
+            "description": "Update only specific book fields"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Book",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/books/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "books", "1", ""]
+            },
+            "description": "Delete a book"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Borrow Records",
+      "item": [
+        {
+          "name": "Get All Borrow Records",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/borrow-records/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "borrow-records", ""]
+            },
+            "description": "Retrieve all borrow records (latest first)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Borrow Record",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"book\": 1,\n  \"borrower_name\": \"Charlie Brown\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/borrow-records/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "borrow-records", ""]
+            },
+            "description": "Create a new borrow record (book must exist)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Borrow Record by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/borrow-records/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "borrow-records", "1", ""]
+            },
+            "description": "Retrieve a specific borrow record"
+          },
+          "response": []
+        },
+        {
+          "name": "Mark Book as Returned (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returned_at\": \"2025-06-17T14:30:00Z\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/borrow-records/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "borrow-records", "1", ""]
+            },
+            "description": "Update a borrow record to mark the book as returned"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Borrow Record (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"book\": 1,\n  \"borrower_name\": \"Alice Johnson Updated\",\n  \"returned_at\": null\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/borrow-records/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "borrow-records", "1", ""]
+            },
+            "description": "Completely replace borrow record data"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Borrow Record",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/borrow-records/1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "borrow-records", "1", ""]
+            },
+            "description": "Delete a borrow record"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

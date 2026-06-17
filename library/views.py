@@ -1,4 +1,5 @@
 from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Author, Book, BorrowRecord
@@ -18,6 +19,12 @@ class AuthorViewSet(viewsets.ModelViewSet):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.select_related("author").all()
     serializer_class = BookSerializer
+
+    @action(detail=False, methods=['delete'], url_path='delete-all')
+    def delete_all(self, request):
+        count = Book.objects.all().count()
+        Book.objects.all().delete()
+        return Response({"message": f"Successfully deleted {count} books."}, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
         book = self.get_object()
